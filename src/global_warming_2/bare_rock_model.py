@@ -1,16 +1,14 @@
-# %%
-
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy.typing import NDArray
 
 STEFAN_BOLTZMANN: float = 5.67e-8  # W/m^2/K^4
 WATER_DENSITY: float = 1000  # kg/m^3
-WATER_SPECIFIC_HEAT: float = 4184  # J/kg/
-SECONDS_PER_YEAR: int = 356 * 24 * 60 * 60
+WATER_SPECIFIC_HEAT: float = 4180  # J/kg/
+SECONDS_PER_YEAR: int = 365 * 24 * 60 * 60
 
-timestep: int = 10  # years
-n_iterations: int = 1000  # number of iterations
+timestep: float = 100  # years
+n_iterations: int = 50  # number of iterations
 
 water_depth: float = 4000  # meters
 solar_constant: float = 1350  # W/m^2
@@ -18,7 +16,6 @@ albedo: float = 0.3  # dimensionless
 epsilon: float = 1  # dimensionless
 
 initial_temperature: float = 0  # K
-initial_heat_content: float = 0  # J
 
 
 Vector = NDArray[np.float64]
@@ -49,8 +46,10 @@ def calculate_temperature(heat_content: float, heat_capacity: float) -> float:
 
 
 if __name__ == "__main__":
+    n_iterations = int(input(""))
+
     time_array: Vector = np.arange(
-        0, n_iterations * timestep, step=timestep, dtype=np.float64
+        0, (n_iterations + 1) * timestep, step=timestep, dtype=np.float64
     )
     heat_content_array: Vector = np.zeros_like(time_array)
     temperature_array: Vector = np.zeros_like(time_array)
@@ -60,8 +59,8 @@ if __name__ == "__main__":
     heat_in: float = calculate_energy_influx(solar_constant, albedo)
 
     # Set initial conditions explicitly
-    heat_content_array[0] = initial_heat_content
     temperature_array[0] = initial_temperature
+    heat_content_array[0] = initial_temperature * heat_capacity_water
 
     # Start looping from index 1
     for i in range(1, len(time_array)):
@@ -74,6 +73,11 @@ if __name__ == "__main__":
             heat_content_array[i], heat_capacity_water
         )
 
+    # Get last heat_out iteration
+    heat_out = calculate_energy_outflux(temperature_array[-1], epsilon)
+
+    print(temperature_array[-1], heat_out)
+
     plt.plot(time_array, temperature_array)
     plt.xlabel("Time (years)")
     plt.ylabel("Temperature (K)")
@@ -81,5 +85,3 @@ if __name__ == "__main__":
     plt.grid()
     plt.tight_layout()
     plt.show()
-
-# %%
