@@ -1,0 +1,23 @@
+[project]
+name = "global-warming-2"
+version = "0.1.0"
+description = "Global warming models for the coursera course on global warming"
+readme = "README.md"
+authors = [
+    { name = "Christian Fojtek", email = "christian.fojtek@hotmail.com" },
+]
+requires-python = ">=3.13"
+dependencies = ["matplotlib>=3.11.1", "numpy>=2.5.2"]
+
+[project.scripts]
+global-warming-2 = "global_warming_2:main"
+
+[build-system]
+requires = ["uv_build>=0.12.6,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.3.0",
+    "pip>=26.2.1",
+]
