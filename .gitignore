@@ -1,3 +1,5 @@
 .venv
 .vscode
 __pycache__
+
+*_grader.py # Remove grader files. Same models, but very stripped down (no type hints, no docstrings, no comments, etc.) for grading purposes.
