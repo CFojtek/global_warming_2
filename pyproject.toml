@@ -7,23 +7,11 @@ authors = [
     { name = "Christian Fojtek", email = "christian.fojtek@hotmail.com" },
 ]
 requires-python = ">=3.13"
-dependencies = [
-    "matplotlib>=3.11.1",
-    "numpy>=2.5.2",
-    "pandas>=3.0.5",
-]
-
-[project.scripts]
-global-warming-2 = "global_warming_2:main"
+dependencies = ["matplotlib>=3.11.1", "numpy>=2.5.2", "pandas>=3.0.5"]
 
 [build-system]
 requires = ["uv_build>=0.12.6,<0.13.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
-dev = [
-    "ipykernel>=7.3.0",
-    "ipympl>=0.10.0",
-    "ipywidgets>=8.1.9",
-    "pip>=26.2.1",
-]
+dev = ["ipykernel>=7.3.0", "ipympl>=0.10.0", "ipywidgets>=8.1.9", "pip>=26.2.1"]
