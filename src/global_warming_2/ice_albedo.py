@@ -1,5 +1,3 @@
-# %%
-
 from dataclasses import dataclass
 
 import matplotlib.pyplot as plt
@@ -136,13 +134,14 @@ def plot_iteration_temperatures(df_temperature_down, df_temperature_up):
     plt.title("Temperature as function of number of iterations, down sweep")
     plt.xlabel("n iterations")
     plt.ylabel("T [K]")
-    plt.show()
+    plt.savefig("plots/ice_albedo/temperature_iterations_down.png", dpi=600)
 
     df_temperature_up.T.plot(legend=False)
     plt.title("Temperature as function of number of iterations, up sweep")
     plt.xlabel("n iterations")
     plt.ylabel("T [K]")
-    plt.show()
+    plt.tight_layout()
+    plt.savefig("plots/ice_albedo/temperature_iterations_up.png", dpi=600)
 
 
 def plot_convergence_values(df_summary, quantity, ylabel):
@@ -155,7 +154,7 @@ def plot_convergence_values(df_summary, quantity, ylabel):
     plt.ylabel(ylabel)
     plt.grid()
     plt.tight_layout()
-    plt.show()
+    plt.savefig(f"plots/ice_albedo/convergent_{quantity}.png", dpi=600)
 
 
 if __name__ == "__main__":
@@ -188,7 +187,6 @@ if __name__ == "__main__":
     sweep_up = run_iterative_solar_constant_sweep(**common_kwargs, mode="increasing")
     df_summary = pd.concat([sweep_down.summary_results, sweep_up.summary_results])
 
-    # %%
     plot_iteration_temperatures(
         sweep_down.temperature_trace, sweep_up.temperature_trace
     )

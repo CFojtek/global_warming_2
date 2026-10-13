@@ -46,8 +46,6 @@ def calculate_temperature(heat_content: float, heat_capacity: float) -> float:
 
 
 if __name__ == "__main__":
-    n_iterations = int(input(""))
-
     time_array: Vector = np.arange(
         0, (n_iterations + 1) * timestep, step=timestep, dtype=np.float64
     )
@@ -84,4 +82,4 @@ if __name__ == "__main__":
     plt.title("Bare rock earth model with time dependant energy balance")
     plt.grid()
     plt.tight_layout()
-    plt.show()
+    plt.savefig("plots/bare_rock/bare_rock_model.png", dpi=600)
